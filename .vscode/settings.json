@@ -1,11 +1,10 @@
 {
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "eslint.workingDirectories": [{ "mode": "auto" }],
-    "conventionalCommits.scopes": ["main", "workflow"],
-    "cSpell.words": ["bunx"]
-  }
-  
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "conventionalCommits.scopes": ["main", "workflow"],
+  "cSpell.words": ["bunx", "youtube", "Youtube"]
+}
