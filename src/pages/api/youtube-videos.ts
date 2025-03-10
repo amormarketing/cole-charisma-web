@@ -13,7 +13,7 @@ export const GET: APIRoute = async () => {
     );
 
     if (!response.ok) {
-      throw new Error('failed to fetch Instagram posts');
+      throw new Error('failed to fetch Youtube videos');
     }
 
     const { items }: YoutubeVideosGoogleResponse = await response.json();

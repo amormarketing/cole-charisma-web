@@ -396,14 +396,18 @@ import { ClientRouter } from 'astro:transitions';
 
             postElement.innerHTML = `
             <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="post-link">
-              <img src="${post.mediaUrl}" alt="Instagram Post">
-            <div class="post-overlay">
+              ${
+                post.mediaType === 'VIDEO'
+                  ? `<video src="${post.mediaUrl}" alt="Instagram Post" autoplay muted></video>`
+                  : `<img src="${post.mediaUrl}" alt="Instagram Post"/>`
+              }
+              <div class="post-overlay">
                 <div class="post-stats">
                     <span><i class="fas fa-heart"></i> ${post.likeCount}</span>
                     <span><i class="fas fa-comment"></i> ${post.commentCount}</span>
                 </div>
-                <p class="post-caption">${post.caption}</p>
-            </div>
+                <p class="post-caption">${post.caption.slice(0, 200)}${post.caption.length > 200 ? '...' : ''}</p>
+              </div>
             </a>
         `;
 
