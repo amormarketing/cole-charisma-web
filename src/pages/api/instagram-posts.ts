@@ -8,7 +8,7 @@ const INSTAGRAM_ACCESS_TOKEN = import.meta.env.INSTAGRAM_ACCESS_TOKEN;
 export const GET: APIRoute = async () => {
   try {
     const response = await fetch(
-      `https://graph.instagram.com/v22.0/17841402971333969/media?fields=copy,media_url,like_count,comments_count&access_token=${INSTAGRAM_ACCESS_TOKEN}`
+      `https://graph.instagram.com/v22.0/17841402971333969/media?fields=copy,media_url,caption,permalink,like_count,comments_count&access_token=${INSTAGRAM_ACCESS_TOKEN}`
     );
 
     if (!response.ok) {
@@ -19,7 +19,9 @@ export const GET: APIRoute = async () => {
 
     const instagramPost: InstagramPost[] = data.map((post) => ({
       id: post.id,
+      caption: post.caption,
       mediaUrl: post.media_url,
+      permalink: post.permalink,
       likeCount: post.like_count,
       commentCount: post.comments_count,
     }));

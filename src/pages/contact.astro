@@ -1,0 +1,75 @@
+---
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout>
+  <!-- Banner Section -->
+  <section class="banner-section">
+    <div class="banner-image">
+      <div class="banner-content">
+        <h1>CONTACT US</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Collaborate Section -->
+  <section class="collaborate-section">
+    <div class="container">
+      <div class="collaborate-content">
+        <h2 class="section-title">
+          <span class="title-orange">Why Collaborate</span>
+          <span class="title-blue">With Them?</span>
+        </h2>
+        <p class="collaborate-text">
+          Join our team and be part of our mission to destigmatize disability and promote inclusive relationships.
+          Explore sponsorship opportunities, creative collaborations, and more. Together, we can inspire positive
+          change.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="contact-form-container">
+        <h2 class="section-title"><span class="title-orange">Get in</span> <span class="title-blue">Touch</span></h2>
+        <form class="contact-form">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Full Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email Address" required />
+          </div>
+          <div class="form-group">
+            <input type="tel" class="form-control" placeholder="Phone Number" />
+          </div>
+          <div class="form-group">
+            <select class="form-control" required>
+              <option value="" disabled selected>Type of Collaboration</option>
+              <option value="sponsorship">Sponsorship</option>
+              <option value="creative">Creative Collaboration</option>
+              <option value="speaking">Speaking Engagement</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn">SEND MESSAGE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Kit Section -->
+  <section class="media-kit-section">
+    <div class="container">
+      <div class="media-kit-content">
+        <h2 class="section-title"><span class="title-orange">MEDIA</span> <span class="title-blue">Kit</span></h2>
+        <p class="media-kit-text">Download our media kit for high-resolution images, bios, and key information.</p>
+        <a href="#" class="btn">DOWNLOAD</a>
+      </div>
+    </div>
+  </section>
+</Layout>

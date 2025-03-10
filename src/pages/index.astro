@@ -5,5 +5,126 @@ export const prerender = true;
 ---
 
 <Layout>
-  <h1>Hello world</h1>
+  <section class="slider-section">
+    <div class="slider">
+      <div class="slide">
+        <div class="slide-content">
+          <h1 class="slide-title">Destigmatizing Disability & Promoting Inclusive Relationships</h1>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-content">
+          <h1 class="slide-title">Join us on our journey filled with love, laughter, and adventure</h1>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="slide-content">
+          <h1 class="slide-title">New content every week – Explore, Learn, and Grow with us</h1>
+        </div>
+      </div>
+    </div>
+    <div class="slider-arrows">
+      <img src="images/icons/ARROW.png" alt="Previous" class="prev-arrow" />
+      <img src="images/icons/ARROW2.png" alt="Next" class="next-arrow" />
+    </div>
+    <div class="slider-nav">
+      <span class="slider-dot active"></span>
+      <span class="slider-dot"></span>
+      <span class="slider-dot"></span>
+    </div>
+  </section>
+
+  <!-- Press Section -->
+  <section class="press-section">
+    <div class="container">
+      <div class="press-logos">
+        <img src="images/logos/respectability-logo.png" alt="RespectAbility" class="press-logo" />
+        <img src="images/logos/hollister-logo.png" alt="Hollister" class="press-logo" />
+        <img src="images/logos/nyt-logo.png" alt="The New York Times" class="press-logo" />
+        <img src="images/logos/today-logo.png" alt="Today Show" class="press-logo" />
+        <img src="images/logos/washpost-logo.png" alt="Washington Post" class="press-logo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome Section -->
+  <section class="welcome-section">
+    <div class="container">
+      <div class="welcome-content">
+        <h2 class="section-title">
+          <span class="title-orange">WELCOME TO</span>
+          <span class="title-blue">Our Page</span>
+        </h2>
+        <p class="welcome-text">
+          We are Cole & Charisma. An interabled and interracial couple on a mission to destigmatize disability and
+          promote inclusive relationships. Join us as we share our journey, filled with love, laughter, and adventure.
+        </p>
+        <a href="about" class="btn">READ MORE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <div class="container">
+      <div class="video-content">
+        <h2 class="section-title">
+          <span class="title-orange">New Videos</span>
+          <span class="title-blue">Every Week!</span>
+        </h2>
+        <p class="video-text">Get a glimpse into our daily lives and adventures. New videos weekly!</p>
+        <div class="video-container">
+          <iframe
+            class="video-frame"
+            src="https://www.youtube.com/embed/latest-video-id"
+            title="Cole & Charisma Latest Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <a href="https://www.youtube.com/@coleandcharisma" class="btn" target="_blank">WATCH MORE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collaboration Section -->
+  <section class="collaboration-section">
+    <div class="container">
+      <div class="collaboration-content">
+        <h2 class="section-title">
+          <span class="title-orange">Collaboration</span>
+          <span class="title-blue">Opportunities</span>
+        </h2>
+        <p class="collaboration-text">
+          Interested in working with us? Explore sponsorship opportunities, creative collaborations, speaking
+          engagements, and more. Together, we can inspire positive change.
+        </p>
+        <form class="collaboration-form">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" required />
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Message" required></textarea>
+          </div>
+          <button type="submit" class="btn">WORK WITH US</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media Section -->
+  <section class="social-section">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="title-orange">RECENT</span>
+        <span class="title-blue">Social Posts</span>
+      </h2>
+      <!-- LightWidget Instagram Feed Embedded -->
+      <div id="instagram-feed" class="social-feed">
+        <!-- Instagram feed will be loaded here -->
+      </div>
+    </div>
+  </section>
 </Layout>

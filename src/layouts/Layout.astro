@@ -1,22 +1,528 @@
+---
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+
+import '@/assets/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cole & Charisma | Destigmatizing Disability & Promoting Inclusive Relationships</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <ClientRouter />
   </head>
   <body>
+    <Header />
     <slot />
+    <Footer />
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        // eslint-disable-next-line prettier/prettier
+        initializeSlider();
+        initializeScrollAnimation();
+        initializeMobileMenu();
+        initializeFormValidation();
+        initializeInstagramFeed();
+        initializeYoutubeEmbed();
+        initializeSmoothScroll();
+        highlightActiveNavItem();
+        handleHeaderScroll(); // Call this function directly
+      });
+
+      /**
+       * Initialize the home page slider
+       */
+      function initializeSlider() {
+        const slider = document.querySelector('.slider');
+        const dots = document.querySelectorAll('.slider-dot');
+
+        if (!slider || !dots.length) return;
+
+        let currentSlide = 0;
+        const slideCount = document.querySelectorAll('.slide').length;
+
+        // Function to set active slide
+        function goToSlide(slideIndex) {
+          // Normalize slide index
+          if (slideIndex >= slideCount) slideIndex = 0;
+          if (slideIndex < 0) slideIndex = slideCount - 1;
+
+          // Update slider position
+          slider.style.transform = `translateX(-${slideIndex * 33.33}%)`;
+
+          // Update active dot
+          dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === slideIndex);
+          });
+
+          currentSlide = slideIndex;
+        }
+
+        // Automatic slide change
+        let autoSlideInterval = setInterval(() => {
+          goToSlide(currentSlide + 1);
+        }, 5000);
+
+        // Add click events to dots
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            goToSlide(index);
+
+            // Reset automatic slide interval
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(() => {
+              goToSlide(currentSlide + 1);
+            }, 5000);
+          });
+        });
+
+        // Add swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider.addEventListener(
+          'touchstart',
+          (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+          },
+          { passive: true }
+        );
+
+        slider.addEventListener(
+          'touchend',
+          (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+          },
+          { passive: true }
+        );
+
+        function handleSwipe() {
+          const swipeThreshold = 50; // minimum distance to register as swipe
+
+          if (touchEndX < touchStartX - swipeThreshold) {
+            // Swipe left - next slide
+            goToSlide(currentSlide + 1);
+          }
+
+          if (touchEndX > touchStartX + swipeThreshold) {
+            // Swipe right - previous slide
+            goToSlide(currentSlide - 1);
+          }
+
+          // Reset automatic slide interval
+          clearInterval(autoSlideInterval);
+          autoSlideInterval = setInterval(() => {
+            goToSlide(currentSlide + 1);
+          }, 5000);
+        }
+
+        // Slider arrows functionality
+        const prevArrow = document.querySelector('.prev-arrow');
+        const nextArrow = document.querySelector('.next-arrow');
+
+        if (prevArrow && nextArrow) {
+          prevArrow.addEventListener('click', () => {
+            goToSlide(currentSlide - 1);
+
+            // Reset automatic slide interval
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(() => {
+              goToSlide(currentSlide + 1);
+            }, 5000);
+          });
+
+          nextArrow.addEventListener('click', () => {
+            goToSlide(currentSlide + 1);
+
+            // Reset automatic slide interval
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(() => {
+              goToSlide(currentSlide + 1);
+            }, 5000);
+          });
+        }
+      }
+
+      /**
+       * Initialize scroll animations
+       */
+      function initializeScrollAnimation() {
+        // Shrink header on scroll
+        const header = document.querySelector('header');
+        const headerShrinkThreshold = 100;
+
+        if (!header) return;
+
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > headerShrinkThreshold) {
+            header.classList.add('shrink');
+          } else {
+            header.classList.remove('shrink');
+          }
+        });
+
+        // Fade in elements when they enter the viewport
+        const animateFadeIn = document.querySelectorAll(
+          '.section-title, .welcome-text, .video-content, .collaboration-content, .press-article'
+        );
+
+        const observeFadeIn = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observeFadeIn.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        animateFadeIn.forEach((element) => {
+          observeFadeIn.observe(element);
+        });
+
+        // Slide in elements from sides
+        const animateSlideLeft = document.querySelectorAll(
+          '.story-container:not(.reverse):not(.full) .story-content, .mission-content'
+        );
+        const animateSlideRight = document.querySelectorAll('.story-container.reverse .story-content');
+
+        const observeSlide = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (entry.target.classList.contains('slide-from-left')) {
+                  entry.target.classList.add('slide-in-left');
+                } else if (entry.target.classList.contains('slide-from-right')) {
+                  entry.target.classList.add('slide-in-right');
+                }
+                observeSlide.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        animateSlideLeft.forEach((element) => {
+          element.classList.add('slide-from-left');
+          observeSlide.observe(element);
+        });
+
+        animateSlideRight.forEach((element) => {
+          element.classList.add('slide-from-right');
+          observeSlide.observe(element);
+        });
+
+        // Add animation classes for content elements
+        const fadeUpElements = document.querySelectorAll('.fade-up');
+        fadeUpElements.forEach((element) => {
+          element.classList.add('animate__animated', 'animate__fadeInUp', 'animate__delay-1s');
+        });
+
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        fadeInElements.forEach((element) => {
+          element.classList.add('animate__animated', 'animate__fadeIn', 'animate__delay-1s');
+        });
+      }
+
+      /**
+       * Handle header scroll effect
+       */
+      function handleHeaderScroll() {
+        const header = document.querySelector('header');
+        const scrollThreshold = 100;
+
+        function updateHeaderBackground() {
+          if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        }
+
+        // Initial check
+        updateHeaderBackground();
+        // Add event listener for scroll
+        window.addEventListener('scroll', updateHeaderBackground);
+      }
+
+      /**
+       * Initialize mobile menu functionality
+       */
+      function initializeMobileMenu() {
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const body = document.body;
+
+        if (hamburger && mobileMenu) {
+          hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+          });
+
+          // Close mobile menu when clicking on a link
+          const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+          mobileMenuLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+              hamburger.classList.remove('active');
+              mobileMenu.classList.remove('active');
+              body.style.overflow = 'auto';
+            });
+          });
+        }
+      }
+
+      /**
+       * Initialize form validation
+       */
+      function initializeFormValidation() {
+        const forms = document.querySelectorAll('form');
+
+        forms.forEach((form) => {
+          // Add custom validation styles
+          const inputs = form.querySelectorAll('input, textarea, select');
+          inputs.forEach((input) => {
+            // Show validation message on blur if invalid
+            input.addEventListener('blur', function () {
+              checkInputValidity(input);
+            });
+
+            // Check validity on input to remove error once corrected
+            input.addEventListener('input', function () {
+              checkInputValidity(input);
+            });
+          });
+
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Check all inputs for validity
+            let isValid = true;
+            inputs.forEach((input) => {
+              if (!checkInputValidity(input)) {
+                isValid = false;
+              }
+            });
+
+            if (isValid) {
+              // Show success message
+              const formParent = form.parentElement;
+              const successMessage = document.createElement('div');
+              successMessage.className = 'form-success-message animate__animated animate__fadeIn';
+              successMessage.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Thank you for reaching out!</h3>
+                    <p>We've received your message and will get back to you soon.</p>
+                `;
+
+              // Replace form with success message
+              form.classList.add('animate__animated', 'animate__fadeOut');
+              setTimeout(() => {
+                form.style.display = 'none';
+                formParent.appendChild(successMessage);
+              }, 500);
+
+              // In a real implementation, you would send the form data to a server here
+              console.log('Form submitted successfully');
+            }
+          });
+        });
+
+        function checkInputValidity(input) {
+          // Remove existing error message
+          const existingError = input.parentElement.querySelector('.error-message');
+          if (existingError) {
+            existingError.remove();
+          }
+
+          // Check if input is valid
+          if (!input.checkValidity()) {
+            input.classList.add('invalid');
+
+            // Create error message
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.textContent = input.validationMessage;
+
+            input.parentElement.appendChild(errorMessage);
+            return false;
+          } else {
+            input.classList.remove('invalid');
+            return true;
+          }
+        }
+      }
+
+      /**
+       * Initialize Instagram feed
+       */
+      async function initializeInstagramFeed() {
+        const instagramFeed = document.getElementById('instagram-feed');
+        if (!instagramFeed) return;
+
+        let posts = [];
+
+        try {
+          const response = await fetch(`/api/instagram-posts`);
+
+          if (!response.ok) {
+            throw new Error('Failed to fetch video');
+          }
+
+          const data = await response.json();
+
+          if (!data || data.length === 0) {
+            throw new Error('No videos found');
+          }
+
+          posts = data;
+          // Create post elements
+          posts.forEach((post) => {
+            const postElement = document.createElement('div');
+            postElement.className = 'social-post';
+
+            postElement.innerHTML = `
+            <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="post-link">
+              <img src="${post.mediaUrl}" alt="Instagram Post">
+            <div class="post-overlay">
+                <div class="post-stats">
+                    <span><i class="fas fa-heart"></i> ${post.likeCount}</span>
+                    <span><i class="fas fa-comment"></i> ${post.commentCount}</span>
+                </div>
+                <p class="post-caption">${post.caption}</p>
+            </div>
+            </a>
+        `;
+
+            instagramFeed.appendChild(postElement);
+          });
+        } catch (error) {
+          console.error('Error loading Instagram feed:', error);
+        }
+      }
+
+      async function initializeYoutubeEmbed() {
+        const videoWrapper = document.querySelector('.video-container');
+
+        if (!videoWrapper) return;
+
+        try {
+          const response = await fetch(`/api/youtube-videos`);
+
+          if (!response.ok) {
+            throw new Error('Failed to fetch video');
+          }
+
+          const data = await response.json();
+
+          if (!data || data.length === 0) {
+            throw new Error('No videos found');
+          }
+
+          const video = data[0];
+          const videoId = video.id;
+
+          videoWrapper.innerHTML = `
+            <iframe class="video-frame" src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen muted></iframe>`;
+        } catch (error) {
+          console.error('Error loading YouTube video:', error);
+          videoWrapper.innerHTML = `
+            <div class="video-loading">
+                Failed to load the latest video. Please try again later.
+            </div>
+        `;
+        }
+      }
+
+      /**
+       * Initialize smooth scrolling for anchor links
+       */
+      function initializeSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (!targetElement) return;
+
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth',
+            });
+          });
+        });
+      }
+
+      /**
+       * Highlight active navigation item based on current page
+       */
+      function highlightActiveNavItem() {
+        const currentPage = window.location.pathname.split('/').pop() || '/';
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach((link) => {
+          const linkPage = link.getAttribute('href');
+          if (linkPage === currentPage || (currentPage === '' && linkPage === '/')) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      /**
+       * Add accessibility features
+       */
+      function enhanceAccessibility() {
+        // Add focus styles
+        const focusableElements = document.querySelectorAll('a, button, input, textarea, select');
+        focusableElements.forEach((element) => {
+          element.addEventListener('focus', () => {
+            element.classList.add('focus-visible');
+          });
+
+          element.addEventListener('blur', () => {
+            element.classList.remove('focus-visible');
+          });
+        });
+
+        // Add ARIA attributes to form elements
+        const formElements = document.querySelectorAll('form');
+        formElements.forEach((form) => {
+          const inputs = form.querySelectorAll('input, textarea, select');
+          inputs.forEach((input) => {
+            const label = input.placeholder || '';
+            if (label) {
+              input.setAttribute('aria-label', label);
+            }
+
+            // Add required info for screen readers
+            if (input.hasAttribute('required')) {
+              input.setAttribute('aria-required', 'true');
+            }
+          });
+        });
+      }
+
+      // Call the accessibility enhancement function
+      enhanceAccessibility();
+    </script>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
