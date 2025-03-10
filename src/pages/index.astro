@@ -98,15 +98,27 @@ export const prerender = true;
           Interested in working with us? Explore sponsorship opportunities, creative collaborations, speaking
           engagements, and more. Together, we can inspire positive change.
         </p>
-        <form class="collaboration-form">
+        <form class="collaboration-form" id="contact-form">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Name" required />
+            <input name="name" type="text" class="form-control" placeholder="Full Name" required />
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email" required />
+            <input name="email" type="email" class="form-control" placeholder="Email Address" required />
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="Message" required></textarea>
+            <input name="phone" type="tel" class="form-control" placeholder="Phone Number" />
+          </div>
+          <div class="form-group">
+            <select name="subject" class="form-control" required>
+              <option value="" disabled selected>Type of Collaboration</option>
+              <option value="Sponsorship">Sponsorship</option>
+              <option value="Creative Collaboration">Creative Collaboration</option>
+              <option value="Speaking Engagement">Speaking Engagement</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea name="message" class="form-control" placeholder="Message" rows="5" required></textarea>
           </div>
           <button type="submit" class="btn">WORK WITH US</button>
         </form>

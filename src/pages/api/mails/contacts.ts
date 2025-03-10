@@ -3,7 +3,7 @@ import type { APIRoute } from 'astro';
 import { internalErrorParser } from '@/utils/internal-error-parser';
 import { transporter, EMAIL_ACCOUNT, emailTemplate } from '@/utils/mail';
 
-const EMAIL_RECEPTOR = import.meta.env.EMAIL_RECEPTOR;
+// const EMAIL_RECEPTOR = import.meta.env.EMAIL_RECEPTOR;
 
 export const POST: APIRoute = async ({ request }) => {
   const data = await request.formData();
@@ -25,7 +25,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const mailOptions = {
     from: EMAIL_ACCOUNT,
-    to: EMAIL_RECEPTOR,
+    to: email.toString(),
     subject: 'C&C WEBSITE CONTACT FORM: ' + email,
     html: emailTemplate(name.toString(), email.toString(), phone.toString(), message.toString(), subject.toString()),
   };
