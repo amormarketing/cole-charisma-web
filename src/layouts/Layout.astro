@@ -38,6 +38,18 @@ import { ClientRouter } from 'astro:transitions';
         handleHeaderScroll(); // Call this function directly
       });
 
+      document.addEventListener('astro:after-swap', function () {
+        initializeSlider();
+        initializeScrollAnimation();
+        initializeMobileMenu();
+        initializeFormValidation();
+        initializeInstagramFeed();
+        initializeYoutubeEmbed();
+        initializeSmoothScroll();
+        highlightActiveNavItem();
+        handleHeaderScroll(); // Call this function directly
+      });
+
       /**
        * Initialize the home page slider
        */
@@ -398,7 +410,7 @@ import { ClientRouter } from 'astro:transitions';
             <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="post-link">
               ${
                 post.mediaType === 'VIDEO'
-                  ? `<video src="${post.mediaUrl}" alt="Instagram Post" autoplay muted></video>`
+                  ? `<video src="${post.mediaUrl}" alt="Instagram Post" autoplay muted loop></video>`
                   : `<img src="${post.mediaUrl}" alt="Instagram Post"/>`
               }
               <div class="post-overlay">
