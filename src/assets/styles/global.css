@@ -564,23 +564,27 @@ header.scrolled .social-icons a {
 /* Add to style.css after the slider-dot styles */
 .slider-arrows {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
-  pointer-events: none;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .slider-arrows img {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   height: 92px;
   cursor: pointer;
   pointer-events: auto;
   transition: transform 0.3s ease;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.slider-arrows h1 {
+  color: white;
+  /* margin: 0 5vw; */
+  max-width: 1000px;
+  margin: auto 10px;
+  text-align: center;
 }
 
 .slider-arrows img.prev-arrow {
@@ -592,7 +596,7 @@ header.scrolled .social-icons a {
 }
 
 .slider-arrows img:hover {
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
 }
 
 @media (max-width: 992px) {
@@ -1479,19 +1483,6 @@ footer {
 @media (max-width: 992px) {
   .mobile-menu-btn {
     display: block;
-  }
-
-  nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 300px;
-    height: 100vh;
-    background-color: white;
-    box-shadow: var(--shadow-lg);
-    z-index: 100;
-    padding: 6rem 2rem 2rem;
-    transition: right 0.3s ease;
   }
 
   nav.mobile-open {
