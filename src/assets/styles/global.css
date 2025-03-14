@@ -110,6 +110,7 @@ a {
 
 a:hover {
   color: var(--color-primary-dark);
+  transform: scale(1.1);
 }
 
 img {
@@ -253,6 +254,11 @@ header.scrolled .top-bar,
 header.scrolled .top-bar a,
 header.scrolled .social-icons a {
   color: var(--color-text-light);
+}
+
+header.scrolled a:hover, li:hover {
+  transform: scale(1.1);
+  color: #e2b280;
 }
 
 /* Top bar styles */
@@ -1206,7 +1212,7 @@ video {
 
 /* =========== Footer =========== */
 footer {
-  background-color: var(--color-text-primary);
+  background-color: #88917c;
   color: var(--color-text-light);
   padding: 5rem 0 1.5rem;
 }
@@ -1325,7 +1331,6 @@ footer {
 
 .footer-bottom p {
   font-size: 0.875rem;
-  color: #94a3b8;
 }
 
 /* =========== Enhanced Hover Effects =========== */
