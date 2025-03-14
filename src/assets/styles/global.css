@@ -489,15 +489,15 @@ header.scrolled .social-icons a {
 }
 
 .slide:nth-child(1) {
-  background-image: url('/images/slides/IMGCOLEANDCHARISMASLIDER1.jpg');
+  background-image: url('/images/slides/slide-1.jpg');
 }
 
 .slide:nth-child(2) {
-  background-image: url('/images/slides/IMGCOLEANDCHARISMASLIDER2.jpg');
+  background-image: url('/images/slides/slide-2.jpg');
 }
 
 .slide:nth-child(3) {
-  background-image: url('/images/slides/IMGCOLEANDCHARISMASLIDER3.jpg');
+  background-image: url('/images/slides/slide-3.jpg');
 }
 
 .slide-content {
@@ -576,8 +576,7 @@ header.scrolled .social-icons a {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 115px;
-  height: 90px;
+  height: 92px;
   cursor: pointer;
   pointer-events: auto;
   transition: transform 0.3s ease;
@@ -596,7 +595,30 @@ header.scrolled .social-icons a {
   transform: translateY(-50%) scale(1.1);
 }
 
+@media (max-width: 992px) {
+  .slider-arrows img {
+    top: 55%;
+    height: 70px;
+  }
+
+  .slider-arrows img.prev-arrow {
+    left: 10px;
+  }
+
+  .slider-arrows img.next-arrow {
+    right: 10px;
+  }
+}
+
 /* =========== Section Styling =========== */
+.brush-stroke {
+  background-image: url('/images/BRUSHSTROKEBEIGE.png');
+  height: 250px;
+  background-size: cover;
+  margin-top: -200px;
+  z-index: 10;
+  position: relative;
+}
 .section-title {
   font-size: 2.5rem;
   font-weight: 800;
@@ -687,18 +709,6 @@ header.scrolled .social-icons a {
 .video-section {
   background-color: #f8fafc;
   position: relative;
-}
-
-.video-section::after {
-  content: '';
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background-color: rgba(99, 102, 241, 0.1);
-  border-radius: 50%;
-  bottom: -150px;
-  right: -150px;
-  z-index: 1;
 }
 
 .video-content {
@@ -911,7 +921,6 @@ video {
 /* =========== Banner Sections =========== */
 .banner-section {
   height: 400px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/banners/ABOUTUSBANNER.png');
   background-size: cover;
   background-position: center;
   color: white;
@@ -921,6 +930,18 @@ video {
   margin-top: 84px;
   padding: 0;
   position: relative;
+}
+
+.about-banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/banners/ABOUTUSBANNER.png');
+}
+
+.press-banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/banners/PRESSBANNER.png');
+}
+
+.contact-banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/banners/CONTACTUSBANNER.png');
 }
 
 /* Banner section adjustment */
